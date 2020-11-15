@@ -2,5 +2,7 @@
   display: flex;
 }
 .row button {
-  font-size: 5em;
+  width: 70px;
+  height: 70px;
+  font-size: 4em;
 }
