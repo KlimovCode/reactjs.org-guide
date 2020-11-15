@@ -1,4 +1,6 @@
 .row {
   display: flex;
-  font-size: 7em;
+}
+.row button {
+  font-size: 5em;
 }
