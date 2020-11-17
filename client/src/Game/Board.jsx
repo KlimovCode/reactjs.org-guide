@@ -39,6 +39,7 @@ export class Board extends React.Component {
     return null;
   }
   handleClick(e) {
+    if(this.calculateWinner(this.state.squares)) return
     let id = e.target.value
     let squares = this.state.squares.slice()
     if(squares[id]) return
