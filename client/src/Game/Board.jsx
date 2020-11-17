@@ -41,6 +41,7 @@ export class Board extends React.Component {
   handleClick(e) {
     let id = e.target.value
     let squares = this.state.squares.slice()
+    if(squares[id]) return
     squares[id] = this.state.isXnext ? 'X' : 'O'
     this.setState({
       squares,
