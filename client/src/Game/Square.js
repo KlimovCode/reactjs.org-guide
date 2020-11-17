@@ -4,8 +4,8 @@ const Square = (props) => {
   return (
     <button 
       className="square"
-      onClick={ () => props.handleClick }
-      value={props.value}
+      onClick={ props.handleClick }
+      value={props.num}
     >
       {props.value}
     </button>
