@@ -49,11 +49,16 @@ export class Board extends React.Component {
   }
 
   render() {
+    let winner = this.calculateWinner(this.state.squares)
     return (
       <div className={s.game}>
         <h1>Game</h1>
         <p>
-          Next player : {this.state.isXnext ? 'X' : 'O'}
+      {
+        winner ? 'Win '+winner+' player' : 
+        this.state.isXnext ? 'Next player : X' :
+        'Next player : O'
+      }
         </p>
         <div className={s.row}>
           {this.renderSquare(0)}
