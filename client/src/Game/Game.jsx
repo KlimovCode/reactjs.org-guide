@@ -1,5 +1,6 @@
 import React from 'react'
 import {Board} from './Board'
+import s from './Game.module.css'
 
 export class Game extends React.Component {
   constructor(props) {
@@ -17,7 +18,6 @@ export class Game extends React.Component {
     const history = this.state.history
     const current = history[history.length - 1]
     const squares = current.squares.slice()
-    alert(history)
     if(calculateWinner(squares) || squares[i]) return
     
     squares[i] = this.state.isXnext ? 'X' : 'O'
@@ -27,6 +27,10 @@ export class Game extends React.Component {
       }]),
       isXnext: !this.state.isXnext
     })
+  }
+
+  jumpTo(i) {
+    alert(i)
   }
 
   render() {
@@ -41,6 +45,20 @@ export class Game extends React.Component {
       status = 'Next is ' + (this.state.isXnext ? 'X' : 'O')
     }
 
+    const moves = history.map((step, move) => {
+      const desc = move ?
+        'go to #' + move :'go to start'
+      return (
+        <li>
+          <button 
+            onClick={() => this.jumpTo(move)}
+          >
+            {desc}
+          </button>
+        </li>
+      );
+    });
+
     return (
       <div>
         {status}
@@ -48,6 +66,7 @@ export class Game extends React.Component {
           squares = {current.squares}
           onClick = {(i) => this.handleClick(i)}
         />
+        <ol className={s.list}> { moves } </ol>
       </div>
     )
   }
