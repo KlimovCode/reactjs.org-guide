@@ -3,65 +3,15 @@ import Square from './Square'
 import s from './Game.module.css'
 
 export class Board extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      squares: Array(9).fill(null),
-      isXnext: true
-    }
-  }
-  renderSquare(num) {
+  renderSquare(i) {
     return <Square 
-              num={num}
-              value={this.state.squares[num]}
-              handleClick={this.handleClick.bind(this)} 
+              value={this.props.squares[i]}
+              onClick={() => this.props.onClick(i)} 
             />
   }
-  calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && 
-          squares[a] === squares[b] && 
-          squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  }
-  handleClick(e) {
-    if(this.calculateWinner(this.state.squares)) return
-    let id = e.target.value
-    let squares = this.state.squares.slice()
-    if(squares[id]) return
-    squares[id] = this.state.isXnext ? 'X' : 'O'
-    this.setState({
-      squares,
-      isXnext: !this.state.isXnext
-    })
-  }
-
   render() {
-    let winner = this.calculateWinner(this.state.squares)
     return (
       <div className={s.game}>
-        <h1>Game</h1>
-        <p>
-      {
-        winner ? 'Win '+winner+' player' : 
-        this.state.isXnext ? 'Next player : X' :
-        'Next player : O'
-      }
-        </p>
         <div className={s.row}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
